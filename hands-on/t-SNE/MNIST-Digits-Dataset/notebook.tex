@@ -1,0 +1,1010 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{t-SNE-MNIST-Digits-Dataset-Threaded}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{t-sne-on-mnist-handwritten-digits-dataset}{%
+\section{t-SNE on MNIST Handwritten Digits
+Dataset}\label{t-sne-on-mnist-handwritten-digits-dataset}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} import required modules}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np} \PY{c+c1}{\PYZsh{} for matrix multiplication}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt} \PY{c+c1}{\PYZsh{} for plotting}
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns} \PY{c+c1}{\PYZsh{} for plotting}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}             \PY{c+c1}{\PYZsh{} for data handling}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{StandardScaler} \PY{c+c1}{\PYZsh{} for column standardization}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{manifold} \PY{k}{import} \PY{n}{TSNE} \PY{c+c1}{\PYZsh{} for t\PYZhy{}SNE}
+        \PY{k+kn}{import} \PY{n+nn}{time} \PY{c+c1}{\PYZsh{} for time measurement}
+        \PY{k+kn}{import} \PY{n+nn}{multiprocessing} \PY{c+c1}{\PYZsh{} for threading}
+        \PY{k+kn}{import} \PY{n+nn}{imageio} \PY{c+c1}{\PYZsh{} for GIF creation}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{multiprocessing}\PY{o}{.}\PY{n}{cpu\PYZus{}count}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+12
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} Read dataset}
+        \PY{c+c1}{\PYZsh{}d0 = pd.read\PYZus{}csv(\PYZsq{}./../../AAIC\PYZhy{}Course/datasets/mnist\PYZhy{}digits\PYZhy{}dataset/train.csv\PYZsq{})}
+        \PY{n}{d0} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./../../../datasets/mnist\PYZhy{}digits\PYZhy{}dataset/train.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{d0}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:}    label  pixel0  pixel1  pixel2  pixel3  pixel4  pixel5  pixel6  pixel7  \textbackslash{}
+        0      1       0       0       0       0       0       0       0       0   
+        1      0       0       0       0       0       0       0       0       0   
+        2      1       0       0       0       0       0       0       0       0   
+        3      4       0       0       0       0       0       0       0       0   
+        4      0       0       0       0       0       0       0       0       0   
+        
+           pixel8    {\ldots}     pixel774  pixel775  pixel776  pixel777  pixel778  \textbackslash{}
+        0       0    {\ldots}            0         0         0         0         0   
+        1       0    {\ldots}            0         0         0         0         0   
+        2       0    {\ldots}            0         0         0         0         0   
+        3       0    {\ldots}            0         0         0         0         0   
+        4       0    {\ldots}            0         0         0         0         0   
+        
+           pixel779  pixel780  pixel781  pixel782  pixel783  
+        0         0         0         0         0         0  
+        1         0         0         0         0         0  
+        2         0         0         0         0         0  
+        3         0         0         0         0         0  
+        4         0         0         0         0         0  
+        
+        [5 rows x 785 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} split the dataset into features and labels}
+        \PY{n}{d\PYZus{}labels\PYZus{}all} \PY{o}{=} \PY{n}{d0}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{d\PYZus{}data\PYZus{}all} \PY{o}{=} \PY{n}{d0}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{d\PYZus{}labels\PYZus{}all}\PY{o}{.}\PY{n}{shape}\PY{p}{,}\PY{n}{d\PYZus{}data\PYZus{}all}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(42000,) (42000, 784)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k}{def} \PY{n+nf}{genTSNEGif}\PY{p}{(}\PY{n}{std\PYZus{}data}\PY{p}{,} \PY{n}{ndp}\PY{p}{,} \PY{n}{p}\PY{p}{,} \PY{n}{itr\PYZus{}list}\PY{p}{,} \PY{n}{img\PYZus{}name}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+sd}{    Fuction which genrate t\PYZhy{}SNE visualtion for each itr\PYZus{}list using given ndp and p}
+        \PY{l+s+sd}{    Generates a GIF and stores it under \PYZsq{}\PYZob{}img\PYZus{}name\PYZcb{}.gif\PYZsq{}}
+        \PY{l+s+sd}{    Where:}
+        \PY{l+s+sd}{    std\PYZus{}data \PYZhy{} Column Standardized Data}
+        \PY{l+s+sd}{    ndp \PYZhy{} Number of Data Points to consider in std\PYZus{}data}
+        \PY{l+s+sd}{    p \PYZhy{} Perplexity}
+        \PY{l+s+sd}{    itr\PYZus{}list \PYZhy{} List of iterations, each iteration will be a frame in GIF}
+        \PY{l+s+sd}{    img\PYZus{}name \PYZhy{} Name of GIF image}
+        \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+            
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No.Of Data Points \PYZhy{} }\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{, Perplexity \PYZhy{} }\PY{l+s+si}{\PYZob{}1\PYZcb{}}\PY{l+s+s1}{, Iterations \PYZhy{} }\PY{l+s+si}{\PYZob{}2\PYZcb{}}\PY{l+s+s1}{, ImageName \PYZhy{} }\PY{l+s+si}{\PYZob{}3\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}
+                 \PY{n}{ndp}\PY{p}{,} \PY{n}{p}\PY{p}{,} \PY{n}{itr\PYZus{}list}\PY{p}{,} \PY{n}{img\PYZus{}name}\PY{p}{)}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} list to hold the frames}
+            \PY{n}{frames} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            
+            \PY{n}{p\PYZus{}data} \PY{o}{=} \PY{n}{standardized\PYZus{}data}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{n}{ndp}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+            \PY{n}{p\PYZus{}labels} \PY{o}{=} \PY{n}{d\PYZus{}train\PYZus{}labels}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{n}{ndp}\PY{p}{]}
+            \PY{c+c1}{\PYZsh{}print(\PYZsq{}t\PYZhy{}SNE Data Points \PYZob{}0\PYZcb{} and its Labels \PYZob{}1\PYZcb{}\PYZsq{}.format(p\PYZus{}data.shape, p\PYZus{}labels.shape))}
+            
+            \PY{k}{for} \PY{n}{itr\PYZus{}val} \PY{o+ow}{in} \PY{n}{itr\PYZus{}list}\PY{p}{:}
+                \PY{n}{img\PYZus{}title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ndp=}\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{ p=}\PY{l+s+si}{\PYZob{}1\PYZcb{}}\PY{l+s+s1}{ itr=}\PY{l+s+si}{\PYZob{}2\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{ndp}\PY{p}{,} \PY{n}{p}\PY{p}{,} \PY{n}{itr\PYZus{}val}\PY{p}{)}
+                \PY{n}{time\PYZus{}start} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+                
+                \PY{n}{model} \PY{o}{=} \PY{n}{TSNE}\PY{p}{(}\PY{n}{n\PYZus{}components}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{perplexity}\PY{o}{=}\PY{n}{p}\PY{p}{,}\PY{n}{n\PYZus{}iter}\PY{o}{=}\PY{n}{itr\PYZus{}val}\PY{p}{)}
+                
+                \PY{n}{tsne\PYZus{}data} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{p\PYZus{}data}\PY{p}{)}
+                \PY{n}{time\PYZus{}elapsed} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{time\PYZus{}start}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{ ==\PYZgt{} t\PYZhy{}SNE done! Time elapsed: }\PY{l+s+si}{\PYZob{}1\PYZcb{}}\PY{l+s+s1}{ seconds}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{img\PYZus{}title}\PY{p}{,} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{time\PYZus{}start}\PY{p}{)}\PY{p}{)}
+                
+                \PY{n}{tsne\PYZus{}data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{vstack}\PY{p}{(}\PY{p}{(}\PY{n}{tsne\PYZus{}data}\PY{o}{.}\PY{n}{T}\PY{p}{,}\PY{n}{p\PYZus{}labels}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+                \PY{c+c1}{\PYZsh{}print(tsne\PYZus{}data.shape)}
+                \PY{c+c1}{\PYZsh{}tsne\PYZus{}data[:4]}
+                
+                \PY{n}{tsne\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{tsne\PYZus{}data}\PY{p}{,}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dim\PYZus{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dim\PYZus{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{}tsne\PYZus{}df.head()}
+        
+                \PY{n}{g} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{FacetGrid}\PY{p}{(}\PY{n}{tsne\PYZus{}df}\PY{p}{,}\PY{n}{hue}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{height}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dim\PYZus{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dim\PYZus{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{add\PYZus{}legend}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+                
+                \PY{n}{g}\PY{o}{.}\PY{n}{fig}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{n}{img\PYZus{}title}\PY{p}{)}
+                \PY{n}{g}\PY{o}{.}\PY{n}{fig}\PY{o}{.}\PY{n}{canvas}\PY{o}{.}\PY{n}{draw}\PY{p}{(}\PY{p}{)}
+                
+                \PY{n}{image} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{frombuffer}\PY{p}{(}\PY{n}{g}\PY{o}{.}\PY{n}{fig}\PY{o}{.}\PY{n}{canvas}\PY{o}{.}\PY{n}{tostring\PYZus{}rgb}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{uint8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{n}{image}  \PY{o}{=} \PY{n}{image}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{g}\PY{o}{.}\PY{n}{fig}\PY{o}{.}\PY{n}{canvas}\PY{o}{.}\PY{n}{get\PYZus{}width\PYZus{}height}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{p}{)}\PY{p}{)}
+        
+                \PY{n}{frames}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{image}\PY{p}{)}
+            
+            \PY{n}{kwargs\PYZus{}write} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fps}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{quantizer}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nq}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}
+            \PY{n}{imageio}\PY{o}{.}\PY{n}{mimsave}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{.gif}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{img\PYZus{}name}\PY{p}{)}\PY{p}{,} \PY{n}{frames}\PY{p}{,} \PY{n}{fps}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+            
+            \PY{k}{return}
+\end{Verbatim}
+
+
+    \hypertarget{training-size---15000}{%
+\subsection{Training Size - 15000}\label{training-size---15000}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Taking 15000 images for training}
+        \PY{n}{training\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{15000}
+        
+        \PY{n}{d\PYZus{}train\PYZus{}labels} \PY{o}{=} \PY{n}{d\PYZus{}labels\PYZus{}all}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{n}{training\PYZus{}size}\PY{p}{)}
+        \PY{n}{d\PYZus{}train\PYZus{}data} \PY{o}{=} \PY{n}{d\PYZus{}data\PYZus{}all}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{n}{training\PYZus{}size}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Shape of Training Data }\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{, Label }\PY{l+s+si}{\PYZob{}1\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{d\PYZus{}train\PYZus{}data}\PY{o}{.}\PY{n}{shape}\PY{p}{,} \PY{n}{d\PYZus{}train\PYZus{}labels}\PY{o}{.}\PY{n}{shape}\PY{p}{)} \PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} standardize the data}
+        \PY{n}{standardized\PYZus{}data} \PY{o}{=} \PY{n}{StandardScaler}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{d\PYZus{}train\PYZus{}data}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{float64}\PY{p}{)}\PY{p}{)}
+        \PY{n}{standardized\PYZus{}data}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Shape of Training Data (15000, 784), Label (15000,)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor} }]:} (15000, 784)
+\end{Verbatim}
+            
+    \hypertarget{t-sne-over-1000-data-points}{%
+\subsubsection{t-SNE over 1000 data
+points}\label{t-sne-over-1000-data-points}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{genTSNEGif}\PY{p}{(}\PY{n}{standardized\PYZus{}data}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{,} \PY{l+m+mi}{30}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1000}\PY{p}{,}\PY{l+m+mi}{10001}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t\PYZus{}15000\PYZus{}d\PYZus{}1000\PYZus{}p\PYZus{}30}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+No.Of Data Points - 1000, Perplexity - 30, Iterations - range(1000, 10001, 1000), ImageName - t\_15000\_d\_1000\_p\_30
+ndp=1000 p=30 itr=1000 ==> t-SNE done! Time elapsed: 8.767564296722412 seconds
+ndp=1000 p=30 itr=2000 ==> t-SNE done! Time elapsed: 15.281407833099365 seconds
+ndp=1000 p=30 itr=3000 ==> t-SNE done! Time elapsed: 21.917317628860474 seconds
+ndp=1000 p=30 itr=4000 ==> t-SNE done! Time elapsed: 28.54077696800232 seconds
+ndp=1000 p=30 itr=5000 ==> t-SNE done! Time elapsed: 35.208890199661255 seconds
+ndp=1000 p=30 itr=6000 ==> t-SNE done! Time elapsed: 42.100470781326294 seconds
+ndp=1000 p=30 itr=7000 ==> t-SNE done! Time elapsed: 48.63226270675659 seconds
+ndp=1000 p=30 itr=8000 ==> t-SNE done! Time elapsed: 55.15706443786621 seconds
+ndp=1000 p=30 itr=9000 ==> t-SNE done! Time elapsed: 62.33098077774048 seconds
+ndp=1000 p=30 itr=10000 ==> t-SNE done! Time elapsed: 65.65820598602295 seconds
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_6.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_7.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_8.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_9.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_10.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{genTSNEGif}\PY{p}{(}\PY{n}{standardized\PYZus{}data}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1000}\PY{p}{,}\PY{l+m+mi}{10001}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t\PYZus{}15000\PYZus{}d\PYZus{}1000\PYZus{}p\PYZus{}50}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+No.Of Data Points - 1000, Perplexity - 50, Iterations - range(1000, 10001, 1000), ImageName - t\_15000\_d\_1000\_p\_50
+ndp=1000 p=50 itr=1000 ==> t-SNE done! Time elapsed: 10.508925676345825 seconds
+ndp=1000 p=50 itr=2000 ==> t-SNE done! Time elapsed: 19.109923362731934 seconds
+ndp=1000 p=50 itr=3000 ==> t-SNE done! Time elapsed: 26.708609580993652 seconds
+ndp=1000 p=50 itr=4000 ==> t-SNE done! Time elapsed: 33.94826126098633 seconds
+ndp=1000 p=50 itr=5000 ==> t-SNE done! Time elapsed: 41.6116144657135 seconds
+ndp=1000 p=50 itr=6000 ==> t-SNE done! Time elapsed: 48.758673429489136 seconds
+ndp=1000 p=50 itr=7000 ==> t-SNE done! Time elapsed: 51.300100326538086 seconds
+ndp=1000 p=50 itr=8000 ==> t-SNE done! Time elapsed: 50.943241357803345 seconds
+ndp=1000 p=50 itr=9000 ==> t-SNE done! Time elapsed: 51.112380266189575 seconds
+ndp=1000 p=50 itr=10000 ==> t-SNE done! Time elapsed: 51.14729022979736 seconds
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_6.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_7.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_8.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_9.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_10.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{t-sne-over-5000-data-points}{%
+\subsubsection{t-SNE over 5000 data
+points}\label{t-sne-over-5000-data-points}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{genTSNEGif}\PY{p}{(}\PY{n}{standardized\PYZus{}data}\PY{p}{,} \PY{l+m+mi}{5000}\PY{p}{,} \PY{l+m+mi}{30}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1000}\PY{p}{,}\PY{l+m+mi}{10001}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t\PYZus{}15000\PYZus{}d\PYZus{}5000\PYZus{}p\PYZus{}30}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+No.Of Data Points - 5000, Perplexity - 30, Iterations - range(1000, 10001, 1000), ImageName - t\_15000\_d\_5000\_p\_30
+ndp=5000 p=30 itr=1000 ==> t-SNE done! Time elapsed: 74.58964729309082 seconds
+ndp=5000 p=30 itr=2000 ==> t-SNE done! Time elapsed: 116.96771430969238 seconds
+ndp=5000 p=30 itr=3000 ==> t-SNE done! Time elapsed: 158.1489634513855 seconds
+ndp=5000 p=30 itr=4000 ==> t-SNE done! Time elapsed: 199.8348081111908 seconds
+ndp=5000 p=30 itr=5000 ==> t-SNE done! Time elapsed: 239.5248773097992 seconds
+ndp=5000 p=30 itr=6000 ==> t-SNE done! Time elapsed: 281.1372809410095 seconds
+ndp=5000 p=30 itr=7000 ==> t-SNE done! Time elapsed: 319.49059796333313 seconds
+ndp=5000 p=30 itr=8000 ==> t-SNE done! Time elapsed: 355.5566313266754 seconds
+ndp=5000 p=30 itr=9000 ==> t-SNE done! Time elapsed: 391.9184534549713 seconds
+ndp=5000 p=30 itr=10000 ==> t-SNE done! Time elapsed: 427.03921484947205 seconds
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_6.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_7.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_8.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_9.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_10.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{genTSNEGif}\PY{p}{(}\PY{n}{standardized\PYZus{}data}\PY{p}{,} \PY{l+m+mi}{5000}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1000}\PY{p}{,}\PY{l+m+mi}{10001}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t\PYZus{}15000\PYZus{}d\PYZus{}5000\PYZus{}p\PYZus{}50}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+No.Of Data Points - 5000, Perplexity - 50, Iterations - range(1000, 10001, 1000), ImageName - t\_15000\_d\_5000\_p\_50
+ndp=5000 p=50 itr=1000 ==> t-SNE done! Time elapsed: 83.9416823387146 seconds
+ndp=5000 p=50 itr=2000 ==> t-SNE done! Time elapsed: 137.22521495819092 seconds
+ndp=5000 p=50 itr=3000 ==> t-SNE done! Time elapsed: 194.28370428085327 seconds
+ndp=5000 p=50 itr=4000 ==> t-SNE done! Time elapsed: 253.0855348110199 seconds
+ndp=5000 p=50 itr=5000 ==> t-SNE done! Time elapsed: 314.7297682762146 seconds
+ndp=5000 p=50 itr=6000 ==> t-SNE done! Time elapsed: 378.68981170654297 seconds
+ndp=5000 p=50 itr=7000 ==> t-SNE done! Time elapsed: 444.68101239204407 seconds
+ndp=5000 p=50 itr=8000 ==> t-SNE done! Time elapsed: 514.4695074558258 seconds
+ndp=5000 p=50 itr=9000 ==> t-SNE done! Time elapsed: 575.7889912128448 seconds
+ndp=5000 p=50 itr=10000 ==> t-SNE done! Time elapsed: 642.7859194278717 seconds
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_6.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_7.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_8.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_9.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_10.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{t-sne-over-15000-data-points}{%
+\subsubsection{t-SNE over 15000 data
+points}\label{t-sne-over-15000-data-points}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{genTSNEGif}\PY{p}{(}\PY{n}{standardized\PYZus{}data}\PY{p}{,} \PY{l+m+mi}{15000}\PY{p}{,} \PY{l+m+mi}{30}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1000}\PY{p}{,}\PY{l+m+mi}{10001}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t\PYZus{}15000\PYZus{}d\PYZus{}15000\PYZus{}p\PYZus{}30}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+No.Of Data Points - 15000, Perplexity - 30, Iterations - range(1000, 10001, 1000), ImageName - t\_15000\_d\_15000\_p\_30
+ndp=15000 p=30 itr=1000 ==> t-SNE done! Time elapsed: 382.7180435657501 seconds
+ndp=15000 p=30 itr=2000 ==> t-SNE done! Time elapsed: 523.3870565891266 seconds
+ndp=15000 p=30 itr=3000 ==> t-SNE done! Time elapsed: 666.2103087902069 seconds
+ndp=15000 p=30 itr=4000 ==> t-SNE done! Time elapsed: 811.8709771633148 seconds
+ndp=15000 p=30 itr=5000 ==> t-SNE done! Time elapsed: 946.0533254146576 seconds
+ndp=15000 p=30 itr=6000 ==> t-SNE done! Time elapsed: 1095.3283324241638 seconds
+ndp=15000 p=30 itr=7000 ==> t-SNE done! Time elapsed: 1233.597757101059 seconds
+ndp=15000 p=30 itr=8000 ==> t-SNE done! Time elapsed: 1375.592225074768 seconds
+ndp=15000 p=30 itr=9000 ==> t-SNE done! Time elapsed: 1516.2682173252106 seconds
+ndp=15000 p=30 itr=10000 ==> t-SNE done! Time elapsed: 1659.1642746925354 seconds
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_6.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_7.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_8.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_9.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_10.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{genTSNEGif}\PY{p}{(}\PY{n}{standardized\PYZus{}data}\PY{p}{,} \PY{l+m+mi}{15000}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1000}\PY{p}{,}\PY{l+m+mi}{10001}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t\PYZus{}15000\PYZus{}d\PYZus{}15000\PYZus{}p\PYZus{}50}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+No.Of Data Points - 15000, Perplexity - 50, Iterations - range(1000, 10001, 1000), ImageName - t\_15000\_d\_15000\_p\_50
+ndp=15000 p=50 itr=1000 ==> t-SNE done! Time elapsed: 490.88792157173157 seconds
+ndp=15000 p=50 itr=2000 ==> t-SNE done! Time elapsed: 672.6919836997986 seconds
+ndp=15000 p=50 itr=3000 ==> t-SNE done! Time elapsed: 866.8310749530792 seconds
+ndp=15000 p=50 itr=4000 ==> t-SNE done! Time elapsed: 1070.9834036827087 seconds
+ndp=15000 p=50 itr=5000 ==> t-SNE done! Time elapsed: 1280.3677475452423 seconds
+ndp=15000 p=50 itr=6000 ==> t-SNE done! Time elapsed: 1484.575926065445 seconds
+ndp=15000 p=50 itr=7000 ==> t-SNE done! Time elapsed: 1702.2496531009674 seconds
+ndp=15000 p=50 itr=8000 ==> t-SNE done! Time elapsed: 1953.8452818393707 seconds
+ndp=15000 p=50 itr=9000 ==> t-SNE done! Time elapsed: 2354.1894524097443 seconds
+ndp=15000 p=50 itr=10000 ==> t-SNE done! Time elapsed: 2754.3687765598297 seconds
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_6.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_7.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_8.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_9.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_10.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{training-size---42000-all}{%
+\subsection{Training Size - 42000
+(All)}\label{training-size---42000-all}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} Taking 42000 images for training}
+        \PY{n}{training\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{42000}
+        
+        \PY{n}{d\PYZus{}train\PYZus{}labels} \PY{o}{=} \PY{n}{d\PYZus{}labels\PYZus{}all}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{n}{training\PYZus{}size}\PY{p}{)}
+        \PY{n}{d\PYZus{}train\PYZus{}data} \PY{o}{=} \PY{n}{d\PYZus{}data\PYZus{}all}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{n}{training\PYZus{}size}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Shape of Training Data }\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{, Label }\PY{l+s+si}{\PYZob{}1\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{d\PYZus{}train\PYZus{}data}\PY{o}{.}\PY{n}{shape}\PY{p}{,} \PY{n}{d\PYZus{}train\PYZus{}labels}\PY{o}{.}\PY{n}{shape}\PY{p}{)} \PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} standardize the data}
+        \PY{n}{standardized\PYZus{}data} \PY{o}{=} \PY{n}{StandardScaler}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{d\PYZus{}train\PYZus{}data}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{float64}\PY{p}{)}\PY{p}{)}
+        \PY{n}{standardized\PYZus{}data}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Shape of Training Data (42000, 784), Label (42000,)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:} (42000, 784)
+\end{Verbatim}
+            
+    \hypertarget{t-sne-over-42000-data-points-all}{%
+\subsubsection{t-SNE over 42000 data points
+(All)}\label{t-sne-over-42000-data-points-all}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{genTSNEGif}\PY{p}{(}\PY{n}{standardized\PYZus{}data}\PY{p}{,} \PY{n}{training\PYZus{}size}\PY{p}{,} \PY{l+m+mi}{30}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1000}\PY{p}{,}\PY{l+m+mi}{10001}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t\PYZus{}42000\PYZus{}d\PYZus{}45000\PYZus{}p\PYZus{}30}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+No.Of Data Points - 42000, Perplexity - 30, Iterations - range(1000, 10001, 1000), ImageName - t\_42000\_d\_45000\_p\_30
+ndp=42000 p=30 itr=1000 ==> t-SNE done! Time elapsed: 2545.7131152153015 seconds
+ndp=42000 p=30 itr=2000 ==> t-SNE done! Time elapsed: 3017.718147754669 seconds
+ndp=42000 p=30 itr=3000 ==> t-SNE done! Time elapsed: 3508.6030945777893 seconds
+ndp=42000 p=30 itr=4000 ==> t-SNE done! Time elapsed: 4017.4480690956116 seconds
+ndp=42000 p=30 itr=5000 ==> t-SNE done! Time elapsed: 4526.589033126831 seconds
+ndp=42000 p=30 itr=6000 ==> t-SNE done! Time elapsed: 5056.142894983292 seconds
+ndp=42000 p=30 itr=7000 ==> t-SNE done! Time elapsed: 5582.91085767746 seconds
+ndp=42000 p=30 itr=8000 ==> t-SNE done! Time elapsed: 6129.846672296524 seconds
+ndp=42000 p=30 itr=9000 ==> t-SNE done! Time elapsed: 6672.509294986725 seconds
+ndp=42000 p=30 itr=10000 ==> t-SNE done! Time elapsed: 7246.688520908356 seconds
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_6.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_7.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_8.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_9.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_10.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{genTSNEGif}\PY{p}{(}\PY{n}{standardized\PYZus{}data}\PY{p}{,} \PY{n}{training\PYZus{}size}\PY{p}{,} \PY{l+m+mi}{40}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1000}\PY{p}{,}\PY{l+m+mi}{5001}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t\PYZus{}42000\PYZus{}d\PYZus{}45000\PYZus{}p\PYZus{}40}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+No.Of Data Points - 42000, Perplexity - 40, Iterations - range(1000, 5001, 1000), ImageName - t\_42000\_d\_45000\_p\_40
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{genTSNEGif}\PY{p}{(}\PY{n}{standardized\PYZus{}data}\PY{p}{,} \PY{n}{training\PYZus{}size}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1000}\PY{p}{,}\PY{l+m+mi}{5001}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t\PYZus{}42000\PYZus{}d\PYZus{}45000\PYZus{}p\PYZus{}50}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{observation}{%
+\section{Observation}\label{observation}}
+
+\begin{itemize}
+\tightlist
+\item
+  1000 Data Points
+
+  \begin{itemize}
+  \tightlist
+  \item
+    No major difference between 1000 and 5000 iterations
+  \item
+    Increasing iteration just increases the map size
+  \end{itemize}
+\end{itemize}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
